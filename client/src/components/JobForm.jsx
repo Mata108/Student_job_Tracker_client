@@ -14,7 +14,7 @@ const JobForm = () => {
     date: "",
     link: "",
   });
-
+const live_url=`https://student-job-tracker-2-azi5.onrender.com`
   const handleChange = (e) => {
     setJob({ ...job, [e.target.name]: e.target.value });
   };
@@ -22,7 +22,7 @@ const JobForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/jobs", job);
+      await axios.post(`${live_url}/api/jobs`, job);
 
       toast.success("Job added successfully!");
       setJob({ company: "", role: "", status: "Applied", date: "", link: "" });
