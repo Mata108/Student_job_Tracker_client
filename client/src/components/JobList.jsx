@@ -3,6 +3,9 @@ import { toast } from 'react-toastify';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
+const live_url=`https://student-job-tracker-2-azi5.onrender.com`
+
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
   const [filter, setFilter] = useState("All");
@@ -13,7 +16,7 @@ const JobList = () => {
 
   const fetchJobs = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/jobs");
+      const res = await axios.get(`${live_url}/api/jobs`);
       setJobs(res.data);
     } catch (err) {
       console.error("Failed to fetch jobs:", err);
@@ -22,7 +25,7 @@ const JobList = () => {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.put(`http://localhost:5000/api/jobs/${id}`, { status: newStatus });
+      await axios.put(`${live_url}/api/jobs/${id}`, { status: newStatus });
       fetchJobs(); // Refresh jobs
       toast.success("Status updated!");
     } catch (err) {
@@ -34,7 +37,7 @@ const JobList = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this job?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/jobs/${id}`);
+        await axios.delete(`${live_url}/api/jobs/${id}`);
         fetchJobs(); // Refresh jobs
         toast.success("Job deleted!");
       } catch (err) {
